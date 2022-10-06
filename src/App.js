@@ -3,7 +3,7 @@ import './App.css';
 
 const App = () => {
   const [state, setState] = useState();
-  const [todoList, setTodoList] = useState(['리액트를 배워봅시다.']);
+  const [todoList, setTodoList] = useState([{ id: 1, title: '리액트를 배워봅시다.' }]);
 
   const onChange = (e) => {
     setState(e.target.value);
@@ -11,7 +11,7 @@ const App = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setTodoList([...todoList, state]);
+    setTodoList([...todoList, { id: todoList.length + 1, title: state }]);
   };
 
   return (
@@ -24,10 +24,10 @@ const App = () => {
         <h1>Todo List</h1>
       </div>
       <div className="todo">
-        {todoList.map((todoList) => {
+        {todoList.map((todo) => {
           return (
-            <div className="box">
-              <div>{todoList}</div>
+            <div className="box" key={todo.id}>
+              <div>{todo.title}</div>
             </div>
           );
         })}
